@@ -1,0 +1,23 @@
+{
+  "name": "library",
+  "version": "1.0.0",
+  "description": "Project: Library for The Odin Project's Javascript Course",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jota98daut/top-library.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jota98daut/top-library/issues"
+  },
+  "homepage": "https://github.com/Jota98daut/top-library#readme",
+  "devDependencies": {
+    "eslint": "^8.31.0"
+  }
+}
