@@ -17,16 +17,6 @@ addBookToLibrary("Carmilla", "Sherdain Le Fanu");
 addBookToLibrary("Sapiens: A Brief History of Humankind", "Yuval Noah Harari");
 addBookToLibrary("At the Precipice", "R. R. Quan");
 addBookToLibrary("Sanctuary", "William Faulkner");
-addBookToLibrary("A Passage to India", "E. M. Foster");
-addBookToLibrary("A Passage to India", "E. M. Foster");
-addBookToLibrary("Daisy Jones and the Six", "Taylor Jenkins Reid");
-addBookToLibrary("Carmilla", "Sherdain Le Fanu");
-addBookToLibrary("Sapiens: A Brief History of Humankind", "Yuval Noah Harari");
-addBookToLibrary("Daisy Jones and the Six", "Taylor Jenkins Reid");
-addBookToLibrary("Carmilla", "Sherdain Le Fanu");
-addBookToLibrary("Sapiens: A Brief History of Humankind", "Yuval Noah Harari");
-addBookToLibrary("At the Precipice", "R. R. Quan");
-addBookToLibrary("Sanctuary", "William Faulkner");
 
 const cardContainer = document.querySelector(".card-container");
 
