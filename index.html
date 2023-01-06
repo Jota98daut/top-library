@@ -9,7 +9,24 @@
     <div class="container">
       <h1>Library</h1>
       <div class="card-container"></div>
-      <button>New Book</button>
+      <button id="show-form-button" class="button">New Book</button>
+
+      <form class="hidden" id="new-book-form">
+        <p>Add a new book to your library!</p>
+        <div>
+          <label for="title">title</label>
+          <input type="text" name="title" id="title">
+        </div>
+        <div>
+          <label for="author">author</label>
+          <input type="text" name="author" id="author">
+        </div>
+        <div>
+          <input type="checkbox" name="read" id="read">
+          <label for="read">I've read it</label>
+        </div>
+        <button class="button">Add book</button>
+      </form>
     </div>
   </body>
 </html>
