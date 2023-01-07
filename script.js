@@ -1,3 +1,7 @@
+const cardContainer = document.querySelector(".card-container");
+const showFormButton = document.querySelector("#show-form-button");
+const newBookForm = document.querySelector("#new-book-form");
+
 const BookStatus = {
   notStarted: "not started",
   reading: "reading",
@@ -9,9 +13,23 @@ class Book {
     this.title = title;
     this.author = author;
     this.pages = pages;
-    this.status = BookStatus.notStarted;
+    this.card = createCard(this);
+    this.setStatus(BookStatus.notStarted);
+    cardContainer.appendChild(this.card);
   }
 }
+
+Book.prototype.setStatus = function (status) {
+  let statusDisplay = this.card.querySelector(".status");
+  let border = "";
+
+  this.status = status;
+  statusDisplay.textContent = status;
+  if (status == BookStatus.notStarted) border = "2px dashed black";
+  else if (status == BookStatus.reading) border = "2px solid yellow";
+  else if (status == BookStatus.finished) border = "2px solid green";
+  this.card.style.border = border;
+};
 
 let myLibrary = [
   new Book("Harry Potter and the Philosopher's Stone", "J. K. Rowling", 300),
@@ -26,14 +44,7 @@ let myLibrary = [
 function addBookToLibrary(title, author, pages) {
   let newBook = new Book(title, author, pages);
   myLibrary.push(newBook);
-  addBookCard(newBook);
 }
-
-const cardContainer = document.querySelector(".card-container");
-const showFormButton = document.querySelector("#show-form-button");
-const newBookForm = document.querySelector("#new-book-form");
-
-myLibrary.forEach(addBookCard);
 
 showFormButton.addEventListener("click", showForm);
 
@@ -63,7 +74,7 @@ function hideForm(e) {
   newBookForm.classList.add("hidden");
 }
 
-function addBookCard(book) {
+function createCard(book) {
   /*
    * <div class="card">
    *   <p class="title">title</p>
@@ -77,7 +88,6 @@ function addBookCard(book) {
    * </div>
    */
   let card = document.createElement("div");
-  cardContainer.appendChild(card);
   card.classList.add("card");
 
   ["title", "author", "pages", "status"].forEach((attr) => {
@@ -103,44 +113,15 @@ function addBookCard(book) {
     "<svg style='width:24px;height:24px' viewBox='0 0 24 24'><path fill='currentColor' d='M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M9,8H11V17H9V8M13,8H15V17H13V8Z' /></svg>";
   deleteButton.addEventListener("click", () => deleteBook(book, card));
 
-  switch (book.status) {
-    case BookStatus.notStarted:
-      card.style.border = "1px dashed black";
-      break;
-    case BookStatus.reading:
-      card.style.border = "1px solid yellow";
-      break;
-    case BookStatus.finished:
-      card.style.border = "1px solid green";
-      break;
-    default:
-      break;
-  }
+  return card;
 }
 
-function changeStatus(book, card) {
-  switch(book.status) {
-    case BookStatus.notStarted:
-      setStatus(book, card, BookStatus.reading);
-      card.style.border = "1px solid yellow";
-      break;
-    case BookStatus.reading:
-      setStatus(book, card, BookStatus.finished);
-      card.style.border = "2px solid green";
-      break;
-    case BookStatus.finished:
-      setStatus(book, card, BookStatus.notStarted);
-      card.style.border = "1px dashed black";
-      break;
-    default: break;
-  }
-}
-
-function setStatus(book, card, status) {
-  let statusDisplay = card.querySelector(".status");
-
-  book.status = status;
-  statusDisplay.textContent = book.status;
+function changeStatus(book) {
+  if (book.status == BookStatus.notStarted) book.setStatus(BookStatus.reading);
+  else if (book.status == BookStatus.reading)
+    book.setStatus(BookStatus.finished);
+  else if (book.status == BookStatus.finished)
+    book.setStatus(BookStatus.notStarted);
 }
 
 function deleteBook(book, card) {
