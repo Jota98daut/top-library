@@ -25,9 +25,9 @@ Book.prototype.setStatus = function (status) {
 
   this.status = status;
   statusDisplay.textContent = status;
-  if (status == BookStatus.notStarted) border = "2px dashed black";
-  else if (status == BookStatus.reading) border = "2px solid yellow";
-  else if (status == BookStatus.finished) border = "2px solid green";
+  if (status == BookStatus.notStarted) border = "2px dashed var(--foreground, white)";
+  else if (status == BookStatus.reading) border = "2px dashed var(--yellow, yellow)";
+  else if (status == BookStatus.finished) border = "2px solid var(--green, green)";
   this.card.style.border = border;
 };
 

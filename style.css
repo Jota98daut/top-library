@@ -1,3 +1,12 @@
+:root {
+  --background: #282828;
+  --foreground: #ebdbb2;
+  --blue: #458588;
+  --green: #98971a;
+  --yellow: #d79921;
+  --grey: #a89984;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -9,6 +18,8 @@ html {
   min-width: 100vw;
   height: 100vh;
   font-family: sans-serif;
+  background-color: var(--background);
+  color: var(--foreground);
 }
 
 .container {
@@ -56,7 +67,9 @@ html {
 }
 
 #new-book-form {
-  background: white;
+  background: var(--background, black);
+  color: var(--foreground, white);
+  font-weight: bold;
   padding: 50px;
   border: 2px solid black;
   border-radius: 30px;
@@ -78,10 +91,12 @@ html {
   display: block;
   appearance: none;
   padding: 5px 10px;
+  background: var(--foreground, white);
   color: rgb(75, 75, 75);
   border: 2px solid black;
   height: 30px;
   border-radius: 15px;
+  backg
 }
 
 #new-book-form input[type="number"] {
@@ -108,31 +123,31 @@ html {
 .card-buttons button,
 .button {
   appearance: none;
-  border: 2px solid white;
+  border: none;
   border-radius: 10px;
+  color: var(--foreground, white);
 }
 
 .card-buttons button {
-  background: white;
-  color: black;
   padding: 5px;
+  background: none;
 }
 
 .button {
   padding: 10px 30px;
   font-weight: bold;
-  background: black;
-  color: white;
+  background: var(--blue, blue);
 }
 
-.card-buttons button:hover,
 .button:hover {
-  filter: invert(100%);
-  cursor: pointer;
+  background-color: #83a596;
 }
 
+.card-buttons button:hover {
+  color: var(--grey, grey);
+}
+
+.card-buttons button:active,
 .button:active {
-  background: black;
-  color: white;
-  border: none;
+  box-shadow: inset 2px 2px grey;
 }
