@@ -35,21 +35,23 @@ html {
 }
 
 .card {
-  border: 1px dashed grey;
   border-radius: 10px;
   padding: 10px;
   display: grid;
   place-content: center;
-  height: 100px;
 }
 
-.card .book-title {
+.card .title {
   font-weight: bold;
   margin-bottom: 5px;
 }
 
 .card .author {
   font-style: italic;
+}
+
+.card .pages::after {
+  content: " pages";
 }
 
 #new-book-form {
@@ -67,31 +69,61 @@ html {
 
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 10px;
 }
 
-#new-book-form input[type="text"] {
+#new-book-form input {
   display: block;
+  appearance: none;
+  padding: 5px 10px;
+  color: rgb(75, 75, 75);
+  border: 2px solid black;
+  height: 30px;
+  border-radius: 15px;
+}
+
+#new-book-form input[type="number"] {
+  width: 75px;
+  text-align: center;
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
+  margin: 0;
 }
 
 .hidden {
   visibility: hidden;
 }
 
-.button {
-  appearance: none;
-  background: black;
-  color: white;
-  padding: 10px 30px;
-  border-radius: 10px;
-  border: none;
-  font-weight: bold;
+.card-buttons {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 
-.button:hover {
+.card-buttons button,
+.button {
+  appearance: none;
+  border: 2px solid white;
+  border-radius: 10px;
+}
+
+.card-buttons button {
   background: white;
   color: black;
-  border: 2px solid black;
+  padding: 5px;
+}
+
+.button {
+  padding: 10px 30px;
+  font-weight: bold;
+  background: black;
+  color: white;
+}
+
+.card-buttons button:hover,
+.button:hover {
+  filter: invert(100%);
   cursor: pointer;
 }
 
