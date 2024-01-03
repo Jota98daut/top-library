@@ -3,7 +3,7 @@ const showFormButton = document.querySelector("#show-form-button");
 const newBookForm = document.querySelector("#new-book-form");
 
 const BookStatus = {
-  notStarted: "not started",
+  "not started": "not started",
   reading: "reading",
   finished: "finished",
 };
@@ -14,22 +14,40 @@ class Book {
     this.author = author;
     this.pages = pages;
     this.card = createCard(this);
-    this.setStatus(BookStatus.notStarted);
+    this.status = BookStatus["not started"];
+    this.styleCard();
     cardContainer.appendChild(this.card);
   }
+
+  get status() { return this._status; }
+  
+  set status(value) {
+    if (!(value in BookStatus))
+      throw "Invalid book status";
+
+    this._status = value;
+  }
+
+  styleCard() {
+    let statusDisplay = this.card.querySelector(".status");
+    let border;
+
+    statusDisplay.textContent = this.status;
+
+    switch (this.status) {
+      case BookStatus["not started"]:
+        border = "2px dashed var(--foreground, white)";
+        break;
+      case BookStatus.reading:
+        border = "2px dashed var(--yellow, yellow)";
+        break;
+      case BookStatus.finished:
+        border = "2px solid var(--green, green)";
+        break;
+    }
+    this.card.style.border = border;
+  }
 }
-
-Book.prototype.setStatus = function (status) {
-  let statusDisplay = this.card.querySelector(".status");
-  let border = "";
-
-  this.status = status;
-  statusDisplay.textContent = status;
-  if (status == BookStatus.notStarted) border = "2px dashed var(--foreground, white)";
-  else if (status == BookStatus.reading) border = "2px dashed var(--yellow, yellow)";
-  else if (status == BookStatus.finished) border = "2px solid var(--green, green)";
-  this.card.style.border = border;
-};
 
 let myLibrary = [
   new Book("Harry Potter and the Philosopher's Stone", "J. K. Rowling", 300),
@@ -117,11 +135,25 @@ function createCard(book) {
 }
 
 function changeStatus(book) {
-  if (book.status == BookStatus.notStarted) book.setStatus(BookStatus.reading);
-  else if (book.status == BookStatus.reading)
-    book.setStatus(BookStatus.finished);
-  else if (book.status == BookStatus.finished)
-    book.setStatus(BookStatus.notStarted);
+  // if (book.status == BookStatus.notStarted)
+  //   book.
+  //   book.setStatus(BookStatus.reading);
+  // else if (book.status == BookStatus.reading)
+  //   book.styleCard();
+  // else if (book.status == BookStatus.finished)
+  //   book.styleCard();
+  switch (book.status) {
+    case BookStatus["not started"]:
+      book.status = BookStatus.reading;
+      break;
+    case BookStatus.reading:
+      book.status = BookStatus.finished;
+      break;
+    case BookStatus.finished:
+      book.status = BookStatus["not started"];
+      break;
+  }
+  book.styleCard();
 }
 
 function deleteBook(book, card) {
